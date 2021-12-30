@@ -1,42 +1,52 @@
-import React,{useEffect,useState} from 'react';
-import {Row,Col} from "react-bootstrap";
+import React,{useState} from 'react';
+import {Row,Col,Button} from "react-bootstrap";
 import "./Weather.css";
 
 
-export const Weather=()=>{
+export default function Weather ({onFetchWeather}) {
   
     const [data, setData] = useState([]);
+    const [lat, setLat] = useState("19.07");
+    const [lon, setLon] = useState("72.87");
     
 
-    const GetWeatherData = async () => {
-      
-      
-        try {
-          const res = await fetch(
-           "https://api.openweathermap.org/data/2.5/onecall?lat=40.71&lon=74.00&units=metric&exclude=minutely,hourly&appid=104df50695a2f73b2d604242576c5690"
-          );
-          const actualData = await res.json();
-          setData(actualData);
-          console.log([actualData]);
-          
-    } catch (err) {
-      console.log(err);
-    }
-  };
-    
-
+    async function GetWeatherData() {
+      const data = await onFetchWeather({lat,lon});
   
-  useEffect(() => {
-    GetWeatherData();
-  }, []);
-    return(
+  if (data) {
+    setData(data);
+    console.log(data);
+  }else{
+    console.log("fetch error");
+  }
 
-<div>
+}
+function handleLatChange(event) {
+  setLat(event.target.value);
+}
+
+function handleLanChange(event) {
+  setLon(event.target.value);
+}
+    return(
+      <div>
+      
+       
 <div className="center">
   <h1>5- day forecast</h1>
   
 </div>
-<Row>
+      
+
+<div className="center">
+<input value={lat} onChange={handleLatChange} type="number"></input>
+<input value={lon} onChange={handleLanChange} type="number"></input>
+<Button onClick={GetWeatherData}>fetch</Button>
+</div>
+
+
+
+ <Row>
 <Col md="1"></Col>
 <Col md="2">
 <div className="card">
@@ -85,9 +95,10 @@ export const Weather=()=>{
 </Col>
 <Col md="1"></Col>
 
-</Row>
+</Row> 
 
      
 </div>
-  );
-};
+  )
+    }
+  
