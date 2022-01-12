@@ -5,7 +5,7 @@ import "./Weather.css";
 
 export default function Weather ({onFetchWeather}) {
   
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(false);
     const [city, setCity] = useState("mumbai");
     
     
@@ -30,31 +30,26 @@ function handleCityChange(event) {
 
     return(
       
-      <div>
+      <div className="main">
       
       
-<div className="center">
-  <h1>5- day forecast</h1>
-  
-</div>
-      
+
+
+{ data ? (
+  <div>
+
+    
 
 <div className="center">
 <input value={city} onChange={handleCityChange} type="text"></input>
-{/* <DropdownButton id="dropdown-basic-button" title={city}>
-  <Dropdown.Item href="#/action-1" onClick={(e) => setCity(e.target.title)}>mumbai</Dropdown.Item>
-  <Dropdown.Item href="#/action-2" onClick={(e) => setCity(e.target.title)}>nanded</Dropdown.Item>
-  <Dropdown.Item href="#/action-3" onClick={(e) => setCity(e.target.title)}>pune</Dropdown.Item>
-</DropdownButton> */}
+
 
 <Button onClick={GetWeatherData}>fetch</Button>
-<h1></h1>
 </div>
-
-
-    <Row>
+  <Row>
 <Col md="1"></Col>
 <Col md="2">
+
 <div className="card">
       <h2>Today</h2>
       <h5>{data.list[0].dt_txt}</h5>
@@ -103,6 +98,20 @@ function handleCityChange(event) {
 <Col md="1"></Col>
 
 </Row> 
+</div>
+):(<div>
+
+    
+
+<div className="center">
+<input value={city} onChange={handleCityChange} type="text"></input>
+
+
+<Button onClick={GetWeatherData}>fetch</Button>
+</div></div>
+)}
+
+    
 </div>
   )
     }

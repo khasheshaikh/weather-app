@@ -1,10 +1,11 @@
 import logo from './logo.svg';
-import React from "react";
-
+import React,{useState} from "react";
+import { BsFillSunFill,BsFillMoonFill } from "react-icons/bs";
 import './App.css';
 import Weather from './components/Weather'
 
 function App() {
+  const [dark, setDark] = useState(false)
   async function GetWeatherData ({city}) {
       
       
@@ -34,8 +35,24 @@ function App() {
   
   
   return (
+    <div className={dark ? "App dark-mode" : "App light-mode"}>
+    <div className="navigation">
     <div>
-    <h1>Welcome</h1>
+    <BsFillSunFill className={dark ? "icon-dark": "icon-light"}/>
+      <label className="switch">
+      
+        <input type="checkbox"
+          onChange={()=>setDark(!dark)}
+        />
+        <span className="slider round"></span>
+      </label>
+      <BsFillMoonFill className={dark ? "icon-dark": "icon-light"}/>
+      </div>
+      <div className={dark ? "center-dark":"center-light"}>  
+      <h1>5- day forecast</h1>
+      </div>
+    </div>
+    
       <Weather onFetchWeather={GetWeatherData}/>
     </div>
   

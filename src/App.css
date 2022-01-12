@@ -1,38 +1,102 @@
-.App {
-  text-align: center;
+.switch {
+  margin: auto;
+  margin-top: 30px;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: grey;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: gray;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px black;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.dark-mode{
+background-color: rgb(36, 35, 35);
+
+}
+
+.light-mode{
+background-color:rgb(197, 197, 197) ;
+
+}
+.icon-dark{
+  font-size: 23px;
+  margin: 0px 5px;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.icon-light{
+  font-size: 23px;
+  margin: 0px 5px;
+  color: black;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navigation{
+  
+  margin: auto;
+  text-align: center;
 }
+.center-dark {
+  margin: auto;
+  width: 60%;
+  text-align: center;
+  padding: 10px;
+  color: white;
+  }
+  .center-light {
+  margin: auto;
+  width: 60%;
+  text-align: center;
+  padding: 10px;
+  color: black;
+  }
